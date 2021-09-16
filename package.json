@@ -1,0 +1,28 @@
+{
+    "name": "fake-graphql-api",
+    "version": "1.0.0",
+    "description": "Fake GraphQL API for testing and prototyping.",
+    "author": "Dhyey Thumar",
+    "email": "dhyeythumar@gmail.com",
+    "license": "MIT",
+    "main": "api/graphql.js",
+    "scripts": {
+        "start": "node api/graphql.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dhyeythumar/fake-graphql-api.git"
+    },
+    "keywords": [],
+    "bugs": {
+        "url": "https://github.com/dhyeythumar/fake-graphql-api/issues"
+    },
+    "homepage": "https://github.com/dhyeythumar/fake-graphql-api#readme",
+    "dependencies": {
+        "apollo-server": "^3.3.0",
+        "apollo-server-core": "^3.3.0",
+        "axios": "^0.21.4",
+        "graphql": "^15.5.3"
+    }
+}
