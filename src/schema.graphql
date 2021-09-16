@@ -1,0 +1,35 @@
+type Query {
+    "Project Intro"
+    info: String
+
+    "Fetch Posts"
+    posts(
+    "Fetch Posts based on UserId" userId: ID,
+    "Sort Posts based on PostId" sort: Sort): [Post!]!
+ 
+    "Fetch single Post based on PostId"
+    post(postId: ID!): Post!
+}
+
+enum Sort {
+    "Posts in Ascending Order" asc
+    "Posts in Descending Ordes" desc
+}
+
+type Post {
+    postId: ID!
+    userId: ID!
+    title: String!
+    body: String!
+}
+
+type Mutation {
+    "Create Post"
+    createPost(userId: ID!, title: String!, body: String!): Post!
+
+    "Update an existing Post"
+    updatePost(postId: ID!, title: String, body: String): Post!
+
+    "Delete an existing Post"
+    deletePost(postId: ID!): Post!
+}
