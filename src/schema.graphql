@@ -2,18 +2,67 @@ type Query {
     "Project Intro"
     info: String
 
+    # --- User Queries ---
+    "Fetch Users"
+    users("Sort Users based on UsesId" sort: Sort): [User!]!
+
+    "Fetch single User based on UserId"
+    user("Fetch User Based on UserId" userId: ID!): User!
+
+    # --- Post Queries ---
     "Fetch Posts"
     posts(
-    "Fetch Posts based on UserId" userId: ID,
-    "Sort Posts based on PostId" sort: Sort): [Post!]!
- 
+        "Fetch Posts based on UserId"
+        userId: ID
+        "Sort Posts based on PostId"
+        sort: Sort
+    ): [Post!]!
+
     "Fetch single Post based on PostId"
     post(postId: ID!): Post!
 }
 
 enum Sort {
-    "Posts in Ascending Order" asc
-    "Posts in Descending Ordes" desc
+    "In Ascending Order"
+    asc
+    "In Descending Ordes"
+    desc
+}
+
+type User {
+    id: ID!
+    name: String!
+    username: String!
+    email: String!
+    phone: String!
+    website: String
+    address: Address
+    company: Company
+
+    "User created Posts"
+    posts: [Post!]!
+
+    # "User created Albums"
+    # albums: [Album!]!
+
+    # "User created Todos"
+    # todos: [Todo!]!
+}
+type Address {
+    street: String
+    suite: String
+    city: String
+    zipcode: String
+    geo: Geo
+}
+type Geo {
+    lat: String
+    lng: String
+}
+type Company {
+    name: String
+    catchPhrase: String
+    bs: String
 }
 
 type Post {
@@ -24,6 +73,21 @@ type Post {
 }
 
 type Mutation {
+    # --- Users Mutations ---
+    "Create User"
+    createUser("Object to create new User" input: UserCreateInput!): User!
+
+    "Update an existing User"
+    updateUser(
+        userId: ID!
+        "Object to update an existsing User"
+        input: UserUpdateInput!
+    ): User!
+
+    "Delete an existing Post"
+    deleteUser(userId: ID!): User!
+
+    # --- Posts Mutations ---
     "Create Post"
     createPost(userId: ID!, title: String!, body: String!): Post!
 
@@ -32,4 +96,39 @@ type Mutation {
 
     "Delete an existing Post"
     deletePost(postId: ID!): Post!
+}
+
+input UserCreateInput {
+    name: String!
+    username: String!
+    email: String!
+    phone: String!
+    website: String
+    address: AddressInput
+    company: CompanyInput
+}
+input UserUpdateInput {
+    name: String
+    username: String
+    email: String
+    phone: String
+    website: String
+    address: AddressInput
+    company: CompanyInput
+}
+input AddressInput {
+    street: String
+    suite: String
+    city: String
+    zipcode: String
+    geo: GeoInput
+}
+input GeoInput {
+    lat: String
+    lng: String
+}
+input CompanyInput {
+    name: String
+    catchPhrase: String
+    bs: String
 }
