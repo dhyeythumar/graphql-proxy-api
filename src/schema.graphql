@@ -120,6 +120,21 @@ type Mutation {
 
     "Delete an existing Post"
     deletePost(postId: ID!): Post!
+
+    # --- Comments Mutations ---
+    "Create Comment"
+    createComment(
+        postId: ID!
+        name: String!
+        email: String!
+        body: String!
+    ): Comment!
+
+    "Update an existing Comment"
+    updateComment(commentId: ID!, body: String): Comment!
+
+    "Delete an existing Comment"
+    deleteComment(commentId: ID!): Comment!
 }
 
 input UserCreateInput {

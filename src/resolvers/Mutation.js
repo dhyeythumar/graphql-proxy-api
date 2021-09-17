@@ -125,8 +125,59 @@ export default {
 
             return deletedPost;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    createComment: async (parent, args, context) => {
+        try {
+            const newComment = await jsonPlaceholder.post(
+                "/comments",
+                {
+                    postId: args.postId,
+                    name: args.name,
+                    email: args.email,
+                    body: args.body,
+                },
+                {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            );
+            return newComment.data;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    updateComment: async (parent, args, context) => {
+        try {
+            const comment = await fetchComment(args.commentId);
+            if (args.body) comment.body = args.body;
+
+            const updatedPost = await jsonPlaceholder.put(
+                `/comments/${args.commentId}`,
+                comment,
+                {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            );
+            return updatedPost.data;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    deleteComment: async (parent, args, context) => {
+        try {
+            const comment = await fetchComment(args.commentId);
+
+            //! doesn't make sense to call this
+            // await jsonPlaceholder.delete(`/comments/${args.commentId}`);
+
+            return comment;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
 };
