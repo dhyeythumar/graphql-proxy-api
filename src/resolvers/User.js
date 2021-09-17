@@ -1,9 +1,11 @@
-import { fetchUserPosts } from "../utils/fetchPostData";
+import { sort } from "../utils/common";
+import { fetchUserPosts } from "../utils/fetchUserData";
 
 export default {
     posts: async (parent, args, context) => {
         try {
-            return await fetchUserPosts(parent.id);
+            const posts = await fetchUserPosts(parent.id);
+            return sort(posts, "asc");
         } catch (err) {
             console.log(err);
             throw new Error(err);
