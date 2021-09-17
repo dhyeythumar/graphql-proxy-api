@@ -1,45 +1,34 @@
+import User from "../lib/UserModule";
+import Post from "../lib/PostModule";
+import Comment from "../lib/CommentModule";
+import Album from "../lib/AlbumModule";
 import { sort } from "../utils/common";
-import {
-    fetchUsers,
-    fetchUser,
-    fetchUserPosts,
-    fetchUserAlbums,
-} from "../utils/fetchUserData";
-import {
-    fetchPosts,
-    fetchPost,
-    fetchPostComments,
-} from "../utils/fetchPostData";
-import { fetchComments, fetchComment } from "../utils/fetchCommentData";
-import { fetchAlbums, fetchAlbum } from "../utils/fetchAlbumData";
 
-// 'parent' parameter carries the return value of the previous resolver execution level
 export default {
     info: () => `A simple fake GraphQL API server`,
-    users: async (parent, args, context) => {
+    users: async (_, args) => {
         try {
-            let users = await fetchUsers();
-
+            let users = await User.fetchUsers();
             return sort(users, args.sort ? args.sort : "asc");
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);
         }
     },
-    user: async (parent, args, context) => {
+    user: async (_, args) => {
         try {
-            const user = await fetchUser(args.userId);
+            const user = await User.fetchUser(args.userId);
             return user;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);
         }
     },
-    posts: async (parent, args, context) => {
+    posts: async (_, args) => {
         try {
             let posts;
-            if (args.userId) posts = await fetchUserPosts(args.userId);
-            else posts = await fetchPosts();
+            if (args.userId) posts = await User.fetchUserPosts(args.userId);
+            else posts = await Post.fetchPosts();
 
             return sort(posts, args.sort ? args.sort : "asc");
         } catch (err) {
@@ -47,20 +36,21 @@ export default {
             throw new Error(err.message);
         }
     },
-    post: async (parent, args, context) => {
+    post: async (_, args) => {
         try {
-            const post = await fetchPost(args.postId);
+            const post = await Post.fetchPost(args.postId);
             return post;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);
         }
     },
-    comments: async (parent, args, context) => {
+    comments: async (_, args) => {
         try {
             let comments;
-            if (args.postId) comments = await fetchPostComments(args.postId);
-            else comments = await fetchComments();
+            if (args.postId)
+                comments = await Post.fetchPostComments(args.postId);
+            else comments = await Comment.fetchComments();
 
             return sort(comments, args.sort ? args.sort : "asc");
         } catch (err) {
@@ -68,20 +58,20 @@ export default {
             throw new Error(err.message);
         }
     },
-    comment: async (parent, args, context) => {
+    comment: async (_, args) => {
         try {
-            const comment = await fetchComment(args.commentId);
+            const comment = await Comment.fetchComment(args.commentId);
             return comment;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);
         }
     },
-    albums: async (parent, args) => {
+    albums: async (_, args) => {
         try {
             let albums;
-            if (args.userId) albums = await fetchUserAlbums(args.userId);
-            else albums = await fetchAlbums();
+            if (args.userId) albums = await User.fetchUserAlbums(args.userId);
+            else albums = await Album.fetchAlbums();
 
             return sort(albums, args.sort ? args.sort : "asc");
         } catch (err) {
@@ -89,9 +79,9 @@ export default {
             throw new Error(err.message);
         }
     },
-    album: async (parent, args) => {
+    album: async (_, args) => {
         try {
-            const album = await fetchAlbum(args.albumId);
+            const album = await Album.fetchAlbum(args.albumId);
             return album;
         } catch (err) {
             console.log(err.message);

@@ -1,5 +1,5 @@
 export default {
-    albumId: (parent, args, context) => {
+    albumId: (parent, args) => {
         return parent.id;
     },
 };

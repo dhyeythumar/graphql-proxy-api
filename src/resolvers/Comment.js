@@ -1,5 +1,5 @@
 export default {
-    commentId: (parent, args, context) => {
+    commentId: (parent, args) => {
         return parent.id;
     },
 };

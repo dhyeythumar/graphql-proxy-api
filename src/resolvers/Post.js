@@ -1,12 +1,12 @@
 import { sort } from "../utils/common";
-import { fetchPostComments } from "../utils/fetchPostData";
+import Post from "../lib/PostModule";
 
 export default {
-    postId: (parent, args, context) => {
+    postId: (parent, args) => {
         return parent.id;
     },
-    comments: async (parent, args, context) => {
-        const comments = await fetchPostComments(parent.id);
+    comments: async (parent, args) => {
+        const comments = await Post.fetchPostComments(parent.id);
         return sort(comments, "asc");
     },
 };
