@@ -22,12 +22,12 @@ export const fetchPost = async (postId) => {
     }
 };
 
-//* fetch User's all Posts
+//* fetch Post's all Comments
 //! returns [] if no data
-export const fetchUserPosts = async (userId) => {
+export const fetchPostComments = async (postId) => {
     try {
-        const post = await jsonPlaceholder.get(`/posts?userId=${userId}`);
-        return post.data;
+        const comments = await jsonPlaceholder.get(`/posts/${postId}/comments`);
+        return comments.data;
     } catch (err) {
         console.log(err);
         throw new Error(err);

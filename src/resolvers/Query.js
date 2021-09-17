@@ -1,6 +1,11 @@
 import { sort } from "../utils/common";
-import { fetchUsers, fetchUser } from "../utils/fetchUserData";
-import { fetchPosts, fetchPost, fetchUserPosts } from "../utils/fetchPostData";
+import { fetchUsers, fetchUser, fetchUserPosts } from "../utils/fetchUserData";
+import {
+    fetchPosts,
+    fetchPost,
+    fetchPostComments,
+} from "../utils/fetchPostData";
+import { fetchComments, fetchComment } from "../utils/fetchCommentData";
 
 // 'parent' parameter carries the return value of the previous resolver execution level
 export default {
@@ -40,6 +45,27 @@ export default {
         try {
             const post = await fetchPost(args.postId);
             return post;
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
+    comments: async (parent, args, context) => {
+        try {
+            let comments;
+            if (args.postId) comments = await fetchPostComments(args.postId);
+            else comments = await fetchComments();
+
+            return sort(comments, args.sort ? args.sort : "asc");
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
+    comment: async (parent, args, context) => {
+        try {
+            const comment = await fetchComment(args.commentId);
+            return comment;
         } catch (err) {
             console.log(err);
             throw new Error(err);
