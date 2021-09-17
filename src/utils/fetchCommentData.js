@@ -6,8 +6,8 @@ export const fetchComments = async () => {
         const comments = await jsonPlaceholder.get(`/comments`);
         return comments.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };
 
@@ -17,7 +17,7 @@ export const fetchComment = async (commentId) => {
         const comment = await jsonPlaceholder.get(`/comments/${commentId}`);
         return comment.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };

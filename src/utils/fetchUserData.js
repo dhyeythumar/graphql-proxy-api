@@ -6,8 +6,8 @@ export const fetchUsers = async () => {
         const users = await jsonPlaceholder.get(`/users`);
         return users.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };
 
@@ -17,8 +17,8 @@ export const fetchUser = async (userId) => {
         const user = await jsonPlaceholder.get(`/users/${userId}`);
         return user.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };
 
@@ -29,7 +29,7 @@ export const fetchUserPosts = async (userId) => {
         const posts = await jsonPlaceholder.get(`/users/${userId}/posts`);
         return posts.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };

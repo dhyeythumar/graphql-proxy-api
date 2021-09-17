@@ -7,8 +7,8 @@ export default {
             const posts = await fetchUserPosts(parent.id);
             return sort(posts, "asc");
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
 };

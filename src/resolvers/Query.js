@@ -16,8 +16,8 @@ export default {
 
             return sort(users, args.sort ? args.sort : "asc");
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     user: async (parent, args, context) => {
@@ -25,8 +25,8 @@ export default {
             const user = await fetchUser(args.userId);
             return user;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     posts: async (parent, args, context) => {
@@ -37,8 +37,8 @@ export default {
 
             return sort(posts, args.sort ? args.sort : "asc");
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     post: async (parent, args, context) => {
@@ -46,8 +46,8 @@ export default {
             const post = await fetchPost(args.postId);
             return post;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     comments: async (parent, args, context) => {
@@ -58,8 +58,8 @@ export default {
 
             return sort(comments, args.sort ? args.sort : "asc");
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     comment: async (parent, args, context) => {
@@ -67,8 +67,8 @@ export default {
             const comment = await fetchComment(args.commentId);
             return comment;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
 };

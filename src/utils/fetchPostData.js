@@ -6,8 +6,8 @@ export const fetchPosts = async () => {
         const posts = await jsonPlaceholder.get(`/posts`);
         return posts.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };
 
@@ -17,8 +17,8 @@ export const fetchPost = async (postId) => {
         const post = await jsonPlaceholder.get(`/posts/${postId}`);
         return post.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };
 
@@ -29,7 +29,7 @@ export const fetchPostComments = async (postId) => {
         const comments = await jsonPlaceholder.get(`/posts/${postId}/comments`);
         return comments.data;
     } catch (err) {
-        console.log(err);
-        throw new Error(err);
+        console.log(err.message);
+        throw new Error(err.message);
     }
 };

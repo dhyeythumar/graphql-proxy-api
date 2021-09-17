@@ -1,6 +1,7 @@
 import { jsonPlaceholder } from "../base-axios";
 import { fetchUser } from "../utils/fetchUserData";
 import { fetchPost } from "../utils/fetchPostData";
+import { fetchComment } from "../utils/fetchCommentData";
 
 export default {
     createUser: async (parent, args, context) => {
@@ -36,15 +37,15 @@ export default {
             );
             return newUser.data;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     updateUser: async (parent, args, context) => {
         try {
             const oldUser = await fetchUser(args.userId);
 
-            // merger new user data to old one
+            // merge new user data to old
             const user = Object.assign(oldUser, args.input);
 
             const updatedUser = await jsonPlaceholder.put(
@@ -56,8 +57,8 @@ export default {
             );
             return updatedUser.data;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     deleteUser: async (parent, args, context) => {
@@ -69,8 +70,8 @@ export default {
 
             return user;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     createPost: async (parent, args, context) => {
@@ -88,8 +89,8 @@ export default {
             );
             return newPost.data;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     updatePost: async (parent, args, context) => {
@@ -101,19 +102,15 @@ export default {
 
             const updatedPost = await jsonPlaceholder.put(
                 `/posts/${args.postId}`,
-                {
-                    userId: post.userId,
-                    title: post.title,
-                    body: post.body,
-                },
+                post,
                 {
                     "Content-type": "application/json; charset=UTF-8",
                 }
             );
             return updatedPost.data;
         } catch (err) {
-            console.log(err);
-            throw new Error(err);
+            console.log(err.message);
+            throw new Error(err.message);
         }
     },
     deletePost: async (parent, args, context) => {
