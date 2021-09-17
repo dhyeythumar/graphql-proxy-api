@@ -22,12 +22,24 @@ export const fetchUser = async (userId) => {
     }
 };
 
-//* fetch User's all Posts
+//* fetch User's Posts
 //! returns [] if no data
 export const fetchUserPosts = async (userId) => {
     try {
         const posts = await jsonPlaceholder.get(`/users/${userId}/posts`);
         return posts.data;
+    } catch (err) {
+        console.log(err.message);
+        throw new Error(err.message);
+    }
+};
+
+//* fetch User's Albums
+//! returns [] if no data
+export const fetchUserAlbums = async (userId) => {
+    try {
+        const albums = await jsonPlaceholder.get(`/users/${userId}/albums`);
+        return albums.data;
     } catch (err) {
         console.log(err.message);
         throw new Error(err.message);

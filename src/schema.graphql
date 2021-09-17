@@ -34,6 +34,18 @@ type Query {
 
     "Fetch single Comment based on CommentId"
     comment(commentId: ID!): Comment!
+
+    # --- Album Queries ---
+    "Fetch Albums"
+    albums(
+        "Fetch Albums based on UserId"
+        userId: ID
+        "Sort Albums based on AlbumId"
+        sort: Sort
+    ): [Album!]!
+
+    "Fetch single Album based on AlbumId"
+    album(albumId: ID!): Album!
 }
 
 enum Sort {
@@ -56,8 +68,8 @@ type User {
     "User created Posts"
     posts: [Post!]!
 
-    # "User created Albums"
-    # albums: [Album!]!
+    "User created Albums"
+    albums: [Album!]!
 
     # "User created Todos"
     # todos: [Todo!]!
@@ -85,7 +97,7 @@ type Post {
     title: String!
     body: String!
 
-    # Comments on a Post
+    "Comments on a Post"
     comments: [Comment!]!
 }
 type Comment {
@@ -96,8 +108,17 @@ type Comment {
     body: String!
 }
 
+type Album {
+    albumId: ID!
+    userId: ID!
+    title: String
+
+    # "Photos stored in an Album"
+    # photos: [Photo!]!
+}
+
 type Mutation {
-    # --- Users Mutations ---
+    # --- User Mutations ---
     "Create User"
     createUser("Object to create new User" input: UserCreateInput!): User!
 
@@ -111,7 +132,7 @@ type Mutation {
     "Delete an existing Post"
     deleteUser(userId: ID!): User!
 
-    # --- Posts Mutations ---
+    # --- Post Mutations ---
     "Create Post"
     createPost(userId: ID!, title: String!, body: String!): Post!
 
@@ -121,7 +142,7 @@ type Mutation {
     "Delete an existing Post"
     deletePost(postId: ID!): Post!
 
-    # --- Comments Mutations ---
+    # --- Comment Mutations ---
     "Create Comment"
     createComment(
         postId: ID!
@@ -135,6 +156,19 @@ type Mutation {
 
     "Delete an existing Comment"
     deleteComment(commentId: ID!): Comment!
+
+    # --- Album Mutations ---
+    "Create Album"
+    createAlbum(
+        userId: ID!
+        title: String!
+    ): Album!
+
+    "Update an existing Album"
+    updateAlbum(albumId: ID!, title: String): Album!
+
+    "Delete an existing Album"
+    deleteAlbum(albumId: ID!): Album!
 }
 
 input UserCreateInput {

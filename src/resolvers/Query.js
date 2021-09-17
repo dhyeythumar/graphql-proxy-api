@@ -1,11 +1,17 @@
 import { sort } from "../utils/common";
-import { fetchUsers, fetchUser, fetchUserPosts } from "../utils/fetchUserData";
+import {
+    fetchUsers,
+    fetchUser,
+    fetchUserPosts,
+    fetchUserAlbums,
+} from "../utils/fetchUserData";
 import {
     fetchPosts,
     fetchPost,
     fetchPostComments,
 } from "../utils/fetchPostData";
 import { fetchComments, fetchComment } from "../utils/fetchCommentData";
+import { fetchAlbums, fetchAlbum } from "../utils/fetchAlbumData";
 
 // 'parent' parameter carries the return value of the previous resolver execution level
 export default {
@@ -66,6 +72,27 @@ export default {
         try {
             const comment = await fetchComment(args.commentId);
             return comment;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    albums: async (parent, args) => {
+        try {
+            let albums;
+            if (args.userId) albums = await fetchUserAlbums(args.userId);
+            else albums = await fetchAlbums();
+
+            return sort(albums, args.sort ? args.sort : "asc");
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    album: async (parent, args) => {
+        try {
+            const album = await fetchAlbum(args.albumId);
+            return album;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);

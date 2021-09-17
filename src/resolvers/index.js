@@ -3,6 +3,7 @@ import Mutation from "./Mutation";
 import User from "./User";
 import Post from "./Post";
 import Comment from "./Comment";
+import Album from "./Album";
 
 export default {
     Query,
@@ -10,4 +11,5 @@ export default {
     User,
     Post,
     Comment,
+    Album,
 };

@@ -2,6 +2,7 @@ import { jsonPlaceholder } from "../base-axios";
 import { fetchUser } from "../utils/fetchUserData";
 import { fetchPost } from "../utils/fetchPostData";
 import { fetchComment } from "../utils/fetchCommentData";
+import { fetchAlbum } from "../utils/fetchAlbumData";
 
 export default {
     createUser: async (parent, args, context) => {
@@ -172,6 +173,55 @@ export default {
             // await jsonPlaceholder.delete(`/comments/${args.commentId}`);
 
             return comment;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    createAlbum: async (parent, args) => {
+        try {
+            const newAlbum = await jsonPlaceholder.post(
+                "/albums",
+                {
+                    userId: args.userId,
+                    title: args.title,
+                },
+                {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            );
+            return newAlbum.data;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    updateAlbum: async (parent, args) => {
+        try {
+            const album = await fetchAlbum(args.albumId);
+            if (args.title) album.title = args.title;
+
+            const updatedAlbum = await jsonPlaceholder.put(
+                `/albums/${args.albumId}`,
+                album,
+                {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            );
+            return updatedAlbum.data;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    deleteAlbum: async (parent, args) => {
+        try {
+            const album = await fetchAlbum(args.albumId);
+
+            //! doesn't make sense to call this
+            // await jsonPlaceholder.delete(`/albums/${args.albumId}`);
+
+            return album;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);
