@@ -1,3 +1,5 @@
+# TODO :: Adding pagination filter options
+
 type Query {
     "Project Intro"
     info: String
@@ -20,6 +22,18 @@ type Query {
 
     "Fetch single Post based on PostId"
     post(postId: ID!): Post!
+
+    # --- Comment Queries ---
+    "Fetch Comments"
+    comments(
+        "Fetch Comments based on PostId"
+        postId: ID
+        "Sort Comments based on CommentId"
+        sort: Sort
+    ): [Comment!]!
+
+    "Fetch single Comment based on CommentId"
+    comment(commentId: ID!): Comment!
 }
 
 enum Sort {
@@ -69,6 +83,16 @@ type Post {
     postId: ID!
     userId: ID!
     title: String!
+    body: String!
+
+    # Comments on a Post
+    comments: [Comment!]!
+}
+type Comment {
+    commentId: ID!
+    postId: ID!
+    name: String!
+    email: String!
     body: String!
 }
 
