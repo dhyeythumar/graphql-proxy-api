@@ -1,6 +1,78 @@
 import { jsonPlaceholder } from "../base-axios";
+import { fetchUser } from "../utils/fetchUserData";
+import { fetchPost } from "../utils/fetchPostData";
 
 export default {
+    createUser: async (parent, args, context) => {
+        try {
+            args = args.input;
+            const newUser = await jsonPlaceholder.post(
+                "/users",
+                {
+                    name: args.name,
+                    username: args.username,
+                    email: args.email,
+                    phone: args.phone,
+                    website: args.website,
+                    address: {
+                        street: args.address?.street,
+                        suite: args.address?.suite,
+                        city: args.address?.city,
+                        zipcode: args.address?.zipcode,
+                        geo: {
+                            lat: args.address?.geo?.lat,
+                            lng: args.address?.geo?.lng,
+                        },
+                    },
+                    company: {
+                        name: args.company?.name,
+                        catchPhrase: args.company?.catchPhrase,
+                        bs: args.company?.bs,
+                    },
+                },
+                {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            );
+            return newUser.data;
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
+    updateUser: async (parent, args, context) => {
+        try {
+            const oldUser = await fetchUser(args.userId);
+
+            // merger new user data to old one
+            const user = Object.assign(oldUser, args.input);
+
+            const updatedUser = await jsonPlaceholder.put(
+                `/users/${args.userId}`,
+                user,
+                {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            );
+            return updatedUser.data;
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
+    deleteUser: async (parent, args, context) => {
+        try {
+            const user = await fetchUser(args.userId);
+
+            //! doesn't make sense to call this
+            // await jsonPlaceholder.delete(`/users/${args.userId}`);
+
+            return user;
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
     createPost: async (parent, args, context) => {
         try {
             const newPost = await jsonPlaceholder.post(
@@ -22,17 +94,17 @@ export default {
     },
     updatePost: async (parent, args, context) => {
         try {
-            const post = await jsonPlaceholder.get(`/posts/${args.postId}`);
+            const post = await fetchPost(args.postId);
 
-            if (args.title) post.data.title = args.title;
-            if (args.body) post.data.body = args.body;
+            if (args.title) post.title = args.title;
+            if (args.body) post.body = args.body;
 
             const updatedPost = await jsonPlaceholder.put(
                 `/posts/${args.postId}`,
                 {
-                    userId: post.data.userId,
-                    title: post.data.title,
-                    body: post.data.body,
+                    userId: post.userId,
+                    title: post.title,
+                    body: post.body,
                 },
                 {
                     "Content-type": "application/json; charset=UTF-8",
@@ -46,13 +118,12 @@ export default {
     },
     deletePost: async (parent, args, context) => {
         try {
-            const deletedPost = await jsonPlaceholder.get(
-                `/posts/${args.postId}`
-            );
+            const deletedPost = await fetchPost(args.postId);
 
-            await jsonPlaceholder.delete(`/posts/${args.postId}`);
+            //! doesn't make sense to call this
+            // await jsonPlaceholder.delete(`/posts/${args.postId}`);
 
-            return deletedPost.data;
+            return deletedPost;
         } catch (err) {
             console.log(err);
             throw new Error(err);

@@ -1,28 +1,36 @@
-import { jsonPlaceholder } from "../base-axios";
+import { sort } from "../utils/common";
+import { fetchUsers, fetchUser } from "../utils/fetchUserData";
+import { fetchPosts, fetchPost, fetchUserPosts } from "../utils/fetchPostData";
 
 // 'parent' parameter carries the return value of the previous resolver execution level
 export default {
     info: () => `A simple fake GraphQL API server`,
+    users: async (parent, args, context) => {
+        try {
+            let users = await fetchUsers();
+
+            return sort(users, args.sort ? args.sort : "asc");
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
+    user: async (parent, args, context) => {
+        try {
+            const user = await fetchUser(args.userId);
+            return user;
+        } catch (err) {
+            console.log(err);
+            throw new Error(err);
+        }
+    },
     posts: async (parent, args, context) => {
         try {
             let posts;
-            if (args.userId)
-                posts = await jsonPlaceholder.get(
-                    `/posts?userId=${args.userId}`
-                );
-            else posts = await jsonPlaceholder.get(`/posts`);
-            posts = posts.data;
+            if (args.userId) posts = await fetchUserPosts(args.userId);
+            else posts = await fetchPosts();
 
-            if (args.sort.toString() == "desc")
-                posts.sort((a, b) => {
-                    return b.id - a.id;
-                });
-            else
-                posts.sort((a, b) => {
-                    return a.id - b.id;
-                });
-
-            return posts;
+            return sort(posts, args.sort ? args.sort : "asc");
         } catch (err) {
             console.log(err);
             throw new Error(err);
@@ -30,8 +38,8 @@ export default {
     },
     post: async (parent, args, context) => {
         try {
-            const post = await jsonPlaceholder.get(`/posts/${args.postId}`);
-            return post.data;
+            const post = await fetchPost(args.postId);
+            return post;
         } catch (err) {
             console.log(err);
             throw new Error(err);
