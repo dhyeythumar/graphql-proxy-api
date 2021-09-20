@@ -19,6 +19,7 @@ const Server = new ApolloServer({
             ? ApolloServerPluginLandingPageProductionDefault({ footer: false })
             : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
     ],
+    introspection: true,
 });
 
 export default Server;
