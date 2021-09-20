@@ -2,10 +2,11 @@ import User from "../lib/UserModule";
 import Post from "../lib/PostModule";
 import Comment from "../lib/CommentModule";
 import Album from "../lib/AlbumModule";
+import Photo from "../lib/PhotoModule";
 import { sort } from "../utils/common";
 
 export default {
-    info: () => `A simple fake GraphQL API server`,
+    info: () => `A simple GraphQL Proxy API server`,
     users: async (_, args) => {
         try {
             let users = await User.fetchUsers();

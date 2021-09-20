@@ -50,7 +50,7 @@ export default class CommentModule {
         return await this.fetchComment(args.commentId);
     }
 
-    //* fetch all Comments
+    //* fetch Comments
     static async fetchComments() {
         try {
             const comments = await jsonPlaceholder.get(`/comments`);
@@ -61,7 +61,7 @@ export default class CommentModule {
         }
     }
 
-    //* fetch a single Comment
+    //* fetch a Comment
     static async fetchComment(commentId) {
         try {
             const comment = await jsonPlaceholder.get(`/comments/${commentId}`);

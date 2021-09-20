@@ -62,7 +62,7 @@ export default class PostModule {
         }
     }
 
-    //* fetch a single Post
+    //* fetch a Post
     static async fetchPost(postId) {
         try {
             const post = await jsonPlaceholder.get(`/posts/${postId}`);
@@ -73,7 +73,7 @@ export default class PostModule {
         }
     }
 
-    //* fetch Post's all Comments
+    //* fetch Post's Comments
     //! returns [] if no data
     static async fetchPostComments(postId) {
         try {
