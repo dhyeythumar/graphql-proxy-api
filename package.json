@@ -1,7 +1,7 @@
 {
-    "name": "fake-graphql-api",
+    "name": "graphql-proxy-api",
     "version": "1.0.0",
-    "description": "Fake GraphQL API for testing and prototyping.",
+    "description": "GraphQL Proxy API for testing and prototyping.",
     "author": "Dhyey Thumar",
     "email": "dhyeythumar@gmail.com",
     "license": "MIT",
@@ -12,13 +12,18 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/dhyeythumar/fake-graphql-api.git"
+        "url": "git+https://github.com/dhyeythumar/graphql-proxy-api.git"
     },
-    "keywords": [],
+    "keywords": [
+        "GraphQL Proxy API",
+        "Wrapper around JSONPlaceholder's Rest APIs",
+        "Vercel Serverless",
+        "GraphQL test API for frontend apps"
+    ],
     "bugs": {
-        "url": "https://github.com/dhyeythumar/fake-graphql-api/issues"
+        "url": "https://github.com/dhyeythumar/graphql-proxy-api/issues"
     },
-    "homepage": "https://github.com/dhyeythumar/fake-graphql-api#readme",
+    "homepage": "https://github.com/dhyeythumar/graphql-proxy-api#readme",
     "dependencies": {
         "apollo-server": "^3.3.0",
         "apollo-server-core": "^3.3.0",
