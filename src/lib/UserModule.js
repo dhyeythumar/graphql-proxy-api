@@ -113,4 +113,16 @@ export default class UserModule {
             throw new Error(err.message);
         }
     }
+
+    //* fetch User's Todos
+    //! returns [] if no data
+    static async fetchUserTodos(userId) {
+        try {
+            const todos = await jsonPlaceholder.get(`/users/${userId}/todos`);
+            return todos.data;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    }
 }

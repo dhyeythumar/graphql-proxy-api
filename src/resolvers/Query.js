@@ -3,6 +3,7 @@ import Post from "../lib/PostModule";
 import Comment from "../lib/CommentModule";
 import Album from "../lib/AlbumModule";
 import Photo from "../lib/PhotoModule";
+import Todo from "../lib/TodoModule";
 import { sort } from "../utils/common";
 
 export default {
@@ -106,6 +107,27 @@ export default {
         try {
             const photo = await Photo.fetchPhoto(args.photoId);
             return photo;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    todos: async (_, args) => {
+        try {
+            let todos;
+            if (args.userId) todos = await User.fetchUserTodos(args.userId);
+            else todos = await Todo.fetchTodos();
+
+            return sort(todos, args.sort ? args.sort : "asc");
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    todo: async (_, args) => {
+        try {
+            const todo = await Todo.fetchTodo(args.todoId);
+            return todo;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);

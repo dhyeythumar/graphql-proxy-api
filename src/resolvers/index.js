@@ -5,6 +5,7 @@ import Post from "./Post";
 import Comment from "./Comment";
 import Album from "./Album";
 import Photo from "./Photo";
+import Todo from "./Todo";
 
 export default {
     Query,
@@ -14,4 +15,5 @@ export default {
     Comment,
     Album,
     Photo,
+    Todo,
 };

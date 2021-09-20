@@ -21,4 +21,13 @@ export default {
             throw new Error(err.message);
         }
     },
+    todos: async (parent, args) => {
+        try {
+            const todos = await User.fetchUserTodos(parent.id);
+            return sort(todos, "asc");
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
 };

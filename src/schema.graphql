@@ -58,6 +58,18 @@ type Query {
 
     "Fetch single Photo based on PhotoId"
     photo(photoId: ID!): Photo!
+
+    # --- Todo Queries ---
+    "Fetch Todos"
+    todos(
+        "Fetch Todos based on UserId"
+        userId: ID
+        "Sort Todos based on TodoId"
+        sort: Sort
+    ): [Todo!]!
+
+    "Fetch single Todo based on TodoId"
+    todo(todoId: ID!): Todo!
 }
 
 enum Sort {
@@ -83,8 +95,8 @@ type User {
     "User created Albums"
     albums: [Album!]!
 
-    # "User created Todos"
-    # todos: [Todo!]!
+    "User created Todos"
+    todos: [Todo!]!
 }
 type Address {
     street: String
@@ -128,13 +140,24 @@ type Album {
     "Photos stored in an Album"
     photos: [Photo!]!
 }
-
 type Photo {
     photoId: ID!
     albumId: ID!
     title: String!
     url: String!
     thumbnailUrl: String!
+}
+
+type Todo {
+    todoId: ID!
+    userId: ID!
+    title: String!
+    completed: Boolean!
+}
+
+enum Boolean {
+    true
+    false
 }
 
 type Mutation {
@@ -206,6 +229,16 @@ type Mutation {
 
     "Delete an existing Photo"
     deletePhoto(photoId: ID!): Photo!
+
+    # --- Todo Mutations ---
+    "Create Todo"
+    createTodo(userId: ID!, title: String!): Todo!
+
+    "Update an existing Todo"
+    updateTodo(todoId: ID!, title: String, completed: Boolean): Todo!
+
+    "Delete an existing Todo"
+    deleteTodo(todoId: ID!): Todo!
 }
 
 input UserCreateInput {
