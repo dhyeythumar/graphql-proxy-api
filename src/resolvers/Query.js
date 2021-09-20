@@ -88,4 +88,26 @@ export default {
             throw new Error(err.message);
         }
     },
+    photos: async (_, args) => {
+        try {
+            let photos;
+            if (args.albumId)
+                photos = await Album.fetchAlbumPhotos(args.albumId);
+            else photos = await Photo.fetchPhotos();
+
+            return sort(photos, args.sort ? args.sort : "asc");
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
+    photo: async (_, args) => {
+        try {
+            const photo = await Photo.fetchPhoto(args.photoId);
+            return photo;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    },
 };

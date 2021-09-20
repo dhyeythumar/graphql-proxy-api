@@ -59,11 +59,25 @@ export default class AlbumModule {
         }
     }
 
-    //* fetch a single Album
+    //* fetch an Album
     static async fetchAlbum(albumId) {
         try {
             const album = await jsonPlaceholder.get(`/albums/${albumId}`);
             return album.data;
+        } catch (err) {
+            console.log(err.message);
+            throw new Error(err.message);
+        }
+    }
+
+    //* fetch Album's Photos
+    //! returns [] if no data
+    static async fetchAlbumPhotos(albumId) {
+        try {
+            const photos = await jsonPlaceholder.get(
+                `/albums/${albumId}/photos`
+            );
+            return photos.data;
         } catch (err) {
             console.log(err.message);
             throw new Error(err.message);

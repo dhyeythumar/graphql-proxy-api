@@ -2,6 +2,7 @@ import User from "../lib/UserModule";
 import Post from "../lib/PostModule";
 import Comment from "../lib/CommentModule";
 import Album from "../lib/AlbumModule";
+import Photo from "../lib/PhotoModule";
 
 export default {
     createUser: async (_, args) => await User.createUser(args.input),
@@ -16,4 +17,7 @@ export default {
     createAlbum: async (_, args) => await Album.createAlbum(args),
     updateAlbum: async (_, args) => await Album.updateAlbum(args),
     deleteAlbum: async (_, args) => await Album.deleteAlbum(args),
+    createPhoto: async (_, args) => await Photo.createPhoto(args),
+    updatePhoto: async (_, args) => await Photo.updatePhoto(args),
+    deletePhoto: async (_, args) => await Photo.deletePhoto(args),
 };

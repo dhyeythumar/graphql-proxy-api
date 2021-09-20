@@ -4,6 +4,7 @@ import User from "./User";
 import Post from "./Post";
 import Comment from "./Comment";
 import Album from "./Album";
+import Photo from "./Photo";
 
 export default {
     Query,
@@ -12,4 +13,5 @@ export default {
     Post,
     Comment,
     Album,
+    Photo,
 };

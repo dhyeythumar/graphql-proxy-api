@@ -46,6 +46,18 @@ type Query {
 
     "Fetch single Album based on AlbumId"
     album(albumId: ID!): Album!
+
+    # --- Photos Queries ---
+    "Fetch Photos"
+    photos(
+        "Fetch Photos based on AlbumId"
+        albumId: ID
+        "Sort Photos based on PhotoId"
+        sort: Sort
+    ): [Photo!]!
+
+    "Fetch single Photo based on PhotoId"
+    photo(photoId: ID!): Photo!
 }
 
 enum Sort {
@@ -113,8 +125,16 @@ type Album {
     userId: ID!
     title: String
 
-    # "Photos stored in an Album"
-    # photos: [Photo!]!
+    "Photos stored in an Album"
+    photos: [Photo!]!
+}
+
+type Photo {
+    photoId: ID!
+    albumId: ID!
+    title: String!
+    url: String!
+    thumbnailUrl: String!
 }
 
 type Mutation {
@@ -159,16 +179,33 @@ type Mutation {
 
     # --- Album Mutations ---
     "Create Album"
-    createAlbum(
-        userId: ID!
-        title: String!
-    ): Album!
+    createAlbum(userId: ID!, title: String!): Album!
 
     "Update an existing Album"
     updateAlbum(albumId: ID!, title: String): Album!
 
     "Delete an existing Album"
     deleteAlbum(albumId: ID!): Album!
+
+    # --- Photo Mutations ---
+    "Create Photo"
+    createPhoto(
+        albumId: ID!
+        title: String!
+        url: String!
+        thumbnailUrl: String!
+    ): Photo!
+
+    "Update an existing Photo"
+    updatePhoto(
+        photoId: ID!
+        title: String
+        url: String
+        thumbnailUrl: String
+    ): Photo!
+
+    "Delete an existing Photo"
+    deletePhoto(photoId: ID!): Photo!
 }
 
 input UserCreateInput {
