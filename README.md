@@ -13,6 +13,7 @@
 -   [Introduction](#introduction)
 -   [Features](#features)
 -   [Getting Started](#getting-started)
+-   [Schema](./Schema.md)
 -   [License](#license)
 -   [Acknowledgements](#acknowledgements)
 
@@ -33,7 +34,7 @@ But I liked the idea of image placeholders for web designers. So I decided to co
 -   No registration required
 -   Zero configuration
 -   Basic GraphQL API
--   "Has many" relationships ([check out schema](./schema.md))
+-   "Has many" relationships ([check out schema](./Schema.md))
 -   Filters and nested resources
 -   Compatible with React, Angular, Vue, Ember, ...
 
