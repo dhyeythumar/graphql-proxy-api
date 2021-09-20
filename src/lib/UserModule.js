@@ -39,7 +39,7 @@ export default class UserModule {
         }
     }
 
-    //* update a User
+    //* update an existing User
     static async updateUser(args) {
         try {
             const oldUser = await this.fetchUser(args.userId);
@@ -61,7 +61,7 @@ export default class UserModule {
         }
     }
 
-    //* delete a User
+    //* delete an existing User
     static async deleteUser(args) {
         //! doesn't make sense to call this
         // await jsonPlaceholder.delete(`/users/${args.userId}`);
@@ -90,8 +90,10 @@ export default class UserModule {
         }
     }
 
+    //! --- Note ---
+    //! for the following methods it will return [] if no data found
+
     //* fetch User's Posts
-    //! returns [] if no data
     static async fetchUserPosts(userId) {
         try {
             const posts = await jsonPlaceholder.get(`/users/${userId}/posts`);
@@ -103,7 +105,6 @@ export default class UserModule {
     }
 
     //* fetch User's Albums
-    //! returns [] if no data
     static async fetchUserAlbums(userId) {
         try {
             const albums = await jsonPlaceholder.get(`/users/${userId}/albums`);
@@ -115,7 +116,6 @@ export default class UserModule {
     }
 
     //* fetch User's Todos
-    //! returns [] if no data
     static async fetchUserTodos(userId) {
         try {
             const todos = await jsonPlaceholder.get(`/users/${userId}/todos`);

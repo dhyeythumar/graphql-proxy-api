@@ -23,7 +23,7 @@ export default class PhotoModule {
         }
     }
 
-    //* update a Photo
+    //* update an existing Photo
     static async updatePhoto(args) {
         try {
             const photo = await this.fetchPhoto(args.photoId);
@@ -45,7 +45,7 @@ export default class PhotoModule {
         }
     }
 
-    //* delete a Photo
+    //* delete an existing Photo
     static async deletePhoto(args) {
         //! doesn't make sense to call this
         // await jsonPlaceholder.delete(`/photos/${args.photoId}`);

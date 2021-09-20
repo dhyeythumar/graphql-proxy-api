@@ -21,7 +21,7 @@ export default class AlbumModule {
         }
     }
 
-    //* update an Album
+    //* update an existing Album
     static async updateAlbum(args) {
         try {
             const album = await this.fetchAlbum(args.albumId);
@@ -41,7 +41,7 @@ export default class AlbumModule {
         }
     }
 
-    //* delete an Album
+    //* delete an existing Album
     static async deleteAlbum(args) {
         //! doesn't make sense to call this
         // await jsonPlaceholder.delete(`/albums/${args.albumId}`);

@@ -22,7 +22,7 @@ export default class PostModule {
         }
     }
 
-    //* update a Post
+    //* update an existing Post
     static async updatePost(args) {
         try {
             const post = await this.fetchPost(args.postId);
@@ -44,7 +44,7 @@ export default class PostModule {
         }
     }
 
-    //* delete a Post
+    //* delete an existing Post
     static async deletePost(args) {
         //! doesn't make sense to call this
         // await jsonPlaceholder.delete(`/posts/${args.postId}`);

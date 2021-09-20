@@ -7,7 +7,7 @@ import Todo from "../lib/TodoModule";
 import { sort } from "../utils/common";
 
 export default {
-    info: () => `A simple GraphQL Proxy API server`,
+    info: () => `Simple GraphQL Proxy API for testing and prototyping`,
     users: async (_, args) => {
         try {
             let users = await User.fetchUsers();

@@ -23,7 +23,7 @@ export default class CommentModule {
         }
     }
 
-    //* update a Comment
+    //* update an existing Comment
     static async updateComment(args) {
         try {
             const comment = await this.fetchComment(args.commentId);
@@ -43,7 +43,7 @@ export default class CommentModule {
         }
     }
 
-    //* delete a Comment
+    //* delete an existing Comment
     static async deleteComment(args) {
         //! doesn't make sense to call this
         // await jsonPlaceholder.delete(`/comments/${args.commentId}`);
