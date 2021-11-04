@@ -1,9 +1,9 @@
-import User from "../lib/UserModule";
-import Post from "../lib/PostModule";
-import Comment from "../lib/CommentModule";
-import Album from "../lib/AlbumModule";
-import Photo from "../lib/PhotoModule";
-import Todo from "../lib/TodoModule";
+import User from "../lib/UserModule.js";
+import Post from "../lib/PostModule.js";
+import Comment from "../lib/CommentModule.js";
+import Album from "../lib/AlbumModule.js";
+import Photo from "../lib/PhotoModule.js";
+import Todo from "../lib/TodoModule.js";
 
 export default {
     // ---

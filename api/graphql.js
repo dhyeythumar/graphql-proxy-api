@@ -6,11 +6,15 @@ import {
     ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
 
-import resolvers from "../src/resolvers/index";
+import resolvers from "../src/resolvers/index.js";
+
+console.log("here");
+
+const __dirname = path.resolve();
 
 const Server = new ApolloServer({
     typeDefs: fs.readFileSync(
-        path.join(__dirname, "../src/", "schema.graphql"),
+        path.join(__dirname, "./src/", "schema.graphql"),
         "utf8"
     ),
     resolvers,
@@ -25,12 +29,9 @@ const Server = new ApolloServer({
 export default Server;
 
 //! ---- For normal testing ----
-// Server
-//     .listen()
+// Server.listen()
 //     .then(() => {
-//         console.log(`
-//     🚀 Server ready at http://localhost:4000${server.graphqlPath}
-//     📭  Query at https://studio.apollographql.com/dev
+//         console.log(`🚀 Server ready at http://localhost:4000${Server.graphqlPath}\n📭  Query at https://studio.apollographql.com/dev
 //     `);
 //     })
 //     .catch((err) => console.error);

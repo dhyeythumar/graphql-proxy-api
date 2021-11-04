@@ -1,11 +1,11 @@
-import Query from "./Query";
-import Mutation from "./Mutation";
-import User from "./User";
-import Post from "./Post";
-import Comment from "./Comment";
-import Album from "./Album";
-import Photo from "./Photo";
-import Todo from "./Todo";
+import Query from "./Query.js";
+import Mutation from "./Mutation.js";
+import User from "./User.js";
+import Post from "./Post.js";
+import Comment from "./Comment.js";
+import Album from "./Album.js";
+import Photo from "./Photo.js";
+import Todo from "./Todo.js";
 
 export default {
     Query,

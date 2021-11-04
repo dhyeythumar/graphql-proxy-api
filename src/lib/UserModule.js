@@ -1,4 +1,4 @@
-import { jsonPlaceholder } from "../utils/base-axios";
+import { jsonPlaceholder } from "../utils/base-axios.js";
 
 export default class UserModule {
     //* create a User

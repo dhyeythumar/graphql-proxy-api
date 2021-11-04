@@ -6,8 +6,9 @@
     "email": "dhyeythumar@gmail.com",
     "license": "MIT",
     "main": "api/graphql.js",
+    "type": "module",
     "scripts": {
-        "start": "node api/graphql.js",
+        "start": "node api/graphql",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

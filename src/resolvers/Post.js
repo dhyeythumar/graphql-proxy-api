@@ -1,5 +1,5 @@
-import { sort } from "../utils/common";
-import Post from "../lib/PostModule";
+import { sort } from "../utils/common.js";
+import Post from "../lib/PostModule.js";
 
 export default {
     postId: (parent, args) => {

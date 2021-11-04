@@ -1,10 +1,10 @@
-import User from "../lib/UserModule";
-import Post from "../lib/PostModule";
-import Comment from "../lib/CommentModule";
-import Album from "../lib/AlbumModule";
-import Photo from "../lib/PhotoModule";
-import Todo from "../lib/TodoModule";
-import { sort } from "../utils/common";
+import User from "../lib/UserModule.js";
+import Post from "../lib/PostModule.js";
+import Comment from "../lib/CommentModule.js";
+import Album from "../lib/AlbumModule.js";
+import Photo from "../lib/PhotoModule.js";
+import Todo from "../lib/TodoModule.js";
+import { sort } from "../utils/common.js";
 
 export default {
     info: () => `Simple GraphQL Proxy API for testing and prototyping`,

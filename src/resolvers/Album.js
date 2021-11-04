@@ -1,5 +1,5 @@
-import { sort } from "../utils/common";
-import Album from "../lib/AlbumModule";
+import { sort } from "../utils/common.js";
+import Album from "../lib/AlbumModule.js";
 
 export default {
     albumId: (parent, args) => {

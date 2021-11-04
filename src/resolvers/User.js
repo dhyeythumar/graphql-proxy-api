@@ -1,5 +1,5 @@
-import { sort } from "../utils/common";
-import User from "../lib/UserModule";
+import { sort } from "../utils/common.js";
+import User from "../lib/UserModule.js";
 
 // 'parent' parameter carries the return value of the previous resolver execution level
 export default {
