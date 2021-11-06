@@ -8,8 +8,6 @@ import {
 
 import resolvers from "../src/resolvers/index.js";
 
-console.log("here");
-
 const __dirname = path.resolve();
 
 const Server = new ApolloServer({
