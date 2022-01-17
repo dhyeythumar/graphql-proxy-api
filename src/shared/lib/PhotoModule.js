@@ -1,4 +1,4 @@
-import { jsonPlaceholder } from "../utils/base-axios.js";
+import { jsonPlaceholder } from "../utils.js";
 
 export default class PhotoModule {
     //* create a Photo

@@ -1,16 +1,18 @@
 {
     "name": "graphql-proxy-api",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "GraphQL Proxy API for testing and prototyping.",
     "author": "Dhyey Thumar",
     "email": "dhyeythumar@gmail.com",
     "license": "MIT",
-    "main": "api/graphql.js",
+    "main": "src/http/any-catchall/index.js",
     "type": "module",
+    "engines": {
+        "node": ">=14"
+    },
     "scripts": {
         "start": "npx sandbox",
-        "test": "echo 'Test not working on Begin.com'",
-        "test:dev": "tape tests/*.test.js | tap-spec"
+        "test": "tape tests/*.test.js | tap-spec"
     },
     "repository": {
         "type": "git",
@@ -26,9 +28,6 @@
         "url": "https://github.com/dhyeythumar/graphql-proxy-api/issues"
     },
     "homepage": "https://github.com/dhyeythumar/graphql-proxy-api#readme",
-    "dependencies": {
-        "axios": "^0.21.4"
-    },
     "devDependencies": {
         "@architect/sandbox": "^4.5.2",
         "tap-spec": "^5.0.0",

@@ -1,9 +1,9 @@
 {
     "type": "module",
     "dependencies": {
-        "@architect/functions": "latest",
         "apollo-server-core": "^3.3.0",
         "apollo-server-lambda": "^3.6.1",
-        "graphql": "^15.5.3"
+        "graphql": "^15.5.3",
+        "@architect/functions": "^4.1.1"
     }
 }

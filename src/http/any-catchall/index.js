@@ -1,52 +1,26 @@
 import arc from "@architect/functions";
-import { promisify } from "util";
-import path, { resolve } from "path";
+import path from "path";
 import fs from "fs";
 import { ApolloServer } from "apollo-server-lambda";
 import {
     ApolloServerPluginLandingPageProductionDefault,
-    ApolloServerPluginLandingPageLocalDefault,
+    ApolloServerPluginLandingPageGraphQLPlayground,
+    // ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
+import resolvers from "@architect/shared/resolvers/index.js";
 
 const __dirname = path.resolve();
 
-const readdir = promisify(fs.readdir);
-async function* getFiles(dir) {
-    const dirents = await readdir(dir, { withFileTypes: true });
-    for (const dirent of dirents) {
-        const res = resolve(dir, dirent.name);
-        if (dirent.isDirectory()) {
-            yield* getFiles(res);
-        } else {
-            yield res;
-        }
-    }
-}
-
-(async () => {
-    try {
-        for await (const f of getFiles("../../var")) {
-            console.log(f);
-        }
-    } catch (err) {
-        console.error(err);
-    }
-})();
-
-console.info("__dirname", __dirname);
-
-import resolvers from "../resolvers/index.js";
-
 const ServerHandler = new ApolloServer({
     typeDefs: fs.readFileSync(
-        path.join(__dirname, "../", "schema.graphql"),
+        path.join(__dirname, "./", "schema.graphql"),
         "utf8"
     ),
     resolvers,
     plugins: [
         process.env.NODE_ENV === "production"
             ? ApolloServerPluginLandingPageProductionDefault({ footer: false })
-            : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+            : ApolloServerPluginLandingPageGraphQLPlayground(),
     ],
     introspection: true,
 }).createHandler();
