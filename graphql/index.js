@@ -27,6 +27,12 @@ const ServerHandler = new ApolloServer({
 export async function handler(event, context, callback) {
     try {
         const body = arc.http.helpers.bodyParser(event);
+        // Support for AWS HTTP API syntax
+        event.httpMethod = event.httpMethod
+            ? event.httpMethod
+            : event.requestContext.http.method;
+        // Also support hte HTTP syntax...
+        event.path = event.rawPath;
         // Body is now parsed, re-encode to JSON for Apollo
         event.body = JSON.stringify(body);
         return ServerHandler(event, context, callback);
