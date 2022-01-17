@@ -1,4 +1,4 @@
-import { sort } from "../utils/common.js";
+import { sort } from "../utils.js";
 import Album from "../lib/AlbumModule.js";
 
 export default {

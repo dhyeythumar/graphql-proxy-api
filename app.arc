@@ -4,7 +4,8 @@ graphql-proxy-api
 @aws
 runtime nodejs14.x
 
+@shared
+src src/shared
+
 @http
-/*
-  method any
-  src /src/graphql
+any /*

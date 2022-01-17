@@ -1,4 +1,4 @@
-import { sort } from "../utils/common.js";
+import { sort } from "../utils.js";
 import Post from "../lib/PostModule.js";
 
 export default {

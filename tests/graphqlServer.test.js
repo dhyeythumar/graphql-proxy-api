@@ -1,7 +1,7 @@
 import test from "tape";
 import tiny from "tiny-json-http";
-import Queries from "./queries.js";
 import sandbox from "@architect/sandbox";
+import Queries from "./queries.js";
 
 const postReq = async (queryObj) => {
     const variables = queryObj.variables ? queryObj.variables : {};
