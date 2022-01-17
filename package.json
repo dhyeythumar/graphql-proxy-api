@@ -12,7 +12,7 @@
     },
     "scripts": {
         "start": "npx sandbox",
-        "test": "tape tests/*.test.js | tap-spec"
+        "test": "tape test/*-test.js | tap-spec"
     },
     "repository": {
         "type": "git",
