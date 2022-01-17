@@ -40,10 +40,12 @@ But I liked the idea of image placeholders for web designers. So I decided to co
 
 ## Getting Started
 
-**You can use GraphQL's introspection feature to directly check out the available Queries & Mutations in Apollo's sandbox environment.**
+**API is avaliable on RapidAPI hub:**  [GraphQL Proxy](https://rapidapi.com/dhyeythumar/api/graphql-proxy)
 
+**You can also directly interact with the API using GraphQL's introspection feature to check out the available Queries & Mutations in Apollo's sandbox environment:**
+
+-   GraphQL Proxy API server link: https://play-clt.begin.app/
 -   Apollo sandbox link: https://studio.apollographql.com/sandbox/explorer
--   GraphQL Proxy API server link: https://graphql-proxy-api.vercel.app/
 
 ## License
 
