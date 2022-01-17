@@ -7,4 +7,4 @@ runtime nodejs14.x
 @http
 /*
   method any
-  src /graphql
+  src /src/graphql
