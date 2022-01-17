@@ -8,8 +8,8 @@
     "main": "api/graphql.js",
     "type": "module",
     "scripts": {
-        "start": "node api/graphql",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "arc sandbox",
+        "test": "tape tests/*.test.js | tap-spec"
     },
     "repository": {
         "type": "git",
@@ -26,9 +26,16 @@
     },
     "homepage": "https://github.com/dhyeythumar/graphql-proxy-api#readme",
     "dependencies": {
-        "apollo-server": "^3.3.0",
+        "@architect/functions": "^4.1.1",
         "apollo-server-core": "^3.3.0",
+        "apollo-server-lambda": "^3.6.1",
         "axios": "^0.21.4",
         "graphql": "^15.5.3"
+    },
+    "devDependencies": {
+        "@architect/sandbox": "^4.5.2",
+        "tap-spec": "^5.0.0",
+        "tape": "^5.4.1",
+        "tiny-json-http": "^7.3.1"
     }
 }
