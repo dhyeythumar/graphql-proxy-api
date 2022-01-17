@@ -9,7 +9,8 @@
     "type": "module",
     "scripts": {
         "start": "arc sandbox",
-        "test": "tape tests/*.test.js | tap-spec"
+        "test": "echo 'Test not working on Begin.com'",
+        "test:dev": "tape tests/*.test.js | tap-spec"
     },
     "repository": {
         "type": "git",
