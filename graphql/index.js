@@ -1,18 +1,18 @@
+import arc from "@architect/functions";
 import path from "path";
 import fs from "fs";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-lambda";
 import {
     ApolloServerPluginLandingPageProductionDefault,
     ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
-
 import resolvers from "../src/resolvers/index.js";
 
 const __dirname = path.resolve();
 
-const Server = new ApolloServer({
+const ServerHandler = new ApolloServer({
     typeDefs: fs.readFileSync(
-        path.join(__dirname, "./src/", "schema.graphql"),
+        path.join(__dirname, "../src/", "schema.graphql"),
         "utf8"
     ),
     resolvers,
@@ -22,14 +22,15 @@ const Server = new ApolloServer({
             : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
     ],
     introspection: true,
-});
+}).createHandler();
 
-export default Server;
-
-//! ---- For normal testing ----
-// Server.listen()
-//     .then(() => {
-//         console.log(`🚀 Server ready at http://localhost:4000${Server.graphqlPath}\n📭  Query at https://studio.apollographql.com/dev
-//     `);
-//     })
-//     .catch((err) => console.error);
+export async function handler(event, context, callback) {
+    try {
+        const body = arc.http.helpers.bodyParser(event);
+        // Body is now parsed, re-encode to JSON for Apollo
+        event.body = JSON.stringify(body);
+        return ServerHandler(event, context, callback);
+    } catch (err) {
+        console.error(err);
+    }
+}
