@@ -8,6 +8,11 @@
     Simple fake GraphQL API for testing & prototyping
 </h4>
 
+<p align="center">
+    <a href="https://rapidapi.com/dhyeythumar/api/graphql-proxy"><img alt="rapidapi-logo" src="https://img.shields.io/badge/Rapid%20API-GraphQL%20Proxy%20Server-%231D4371?style=for-the-badge&logo=" /></a>
+    <a href="https://studio.apollographql.com/sandbox/explorer?endpoint=https%3A%2F%2Fplay-clt.begin.app%2F"><img alt="apollo-logo" src="https://img.shields.io/badge/Apollo%20GraphQL%20Sandbox-Testing%20Env-%231b2240?style=for-the-badge&logo=apollographql" /></a>
+</p>
+
 ## What’s In This Document
 
 -   [Introduction](#introduction)
