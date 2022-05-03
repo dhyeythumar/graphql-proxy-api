@@ -29,17 +29,45 @@ const ServerHandler = new ApolloServer({
 
 export async function handler(event, context, callback) {
     try {
-        const body = arc.http.helpers.bodyParser(event);
         // Support for AWS HTTP API syntax
         event.httpMethod = event.httpMethod
             ? event.httpMethod
             : event.requestContext.http.method;
+        if (event.httpMethod === "OPTIONS")
+            return {
+                statusCode: 204,
+                headers: {
+                    "Access-Control-Request-Method": "OPTIONS, POST",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Max-Age": "86400", // cache preflight/cors request by browsers
+                    "Cache-Control": "max-age=604800, public",
+                    "Content-Type": "application/json; charset=utf8",
+                    Connection: "Keep-Alive",
+                    Server: "dhyey's GraphQL Proxy API",
+                },
+            };
+        else if (event.httpMethod !== "POST")
+            throw new Error(
+                `${event.httpMethod} method is not allowed! Only POST is valid method for this GraphQL API.`
+            );
+
         // Also support hte HTTP syntax...
         event.path = event.rawPath;
         // Body is now parsed, re-encode to JSON for Apollo
-        event.body = JSON.stringify(body);
+        event.body = JSON.stringify(arc.http.helpers.bodyParser(event));
         return ServerHandler(event, context, callback);
     } catch (err) {
-        console.error(err);
+        return {
+            body: JSON.stringify({
+                error: err.message,
+            }),
+            statusCode: 400,
+            headers: {
+                "Cache-Control": "max-age=604800, public",
+                "Content-Type": "application/json; charset=utf8",
+                Connection: "Keep-Alive",
+                Server: "dhyey's GraphQL Proxy API",
+            },
+        };
     }
 }
